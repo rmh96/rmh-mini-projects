@@ -30,7 +30,7 @@ export const useTicTacToe = (dynaMicBoard) => {
     const diagonal1 = [],
       diagonal2 = [];
     for (let i = 0; i < dynaMicBoard; i++) {
-      diagonal1.push(i * dynaMicBoard + 1);
+      diagonal1.push(i * dynaMicBoard + i);
       diagonal2.push(i * dynaMicBoard + (dynaMicBoard - 1 - i));
     }
     winningPattern.push(diagonal1);
@@ -41,7 +41,6 @@ export const useTicTacToe = (dynaMicBoard) => {
 
   const currentStatus = () => {
     const winner = calculateWinner(board);
-    console.log("return - ", winner);
     if (winner) return "Player " + winner + " won!";
     if (!board.includes(null)) return "It's a draw...";
     else return `Player ${isXNext ? "X" : "O"} turn`;
