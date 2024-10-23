@@ -2,7 +2,6 @@ import "./App.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { miniProjectNamesAndLinks as existingPath } from "./utils/appRouter";
-import Testing from "./components/Testing";
 
 const App = () => {
   const navigate = useNavigate();
@@ -12,7 +11,7 @@ const App = () => {
         Please create a new route to test functionality... Happy coding
       </div>
       <div className="font-semibold mt-10 w-full text-xl text-center">
-        Mini Projects:
+        RMH Mini Projects:
       </div>
       <div className="flex px-5 py-14 flex-wrap">
         {existingPath.map((item) => {

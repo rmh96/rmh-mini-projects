@@ -4,8 +4,8 @@ import App from "../App";
 import { explorer } from "./constants";
 import BackToHome from "../components/BackToHome";
 import { Suspense, lazy } from "react";
-import Testing from "../components/Testing";
 
+//Component in Lazy Loading
 const TestSuspense = lazy(() => import("../components/TestingSuspense"));
 const KanbanBoard = lazy(() => import("../components/KanbanBoard"));
 const NextPrevSlide = lazy(() => import("../components/NextPrevSlides"));
@@ -19,14 +19,13 @@ const FileExplorer = lazy(() => import("../components/FileExplorer"));
 const AutoCounterStopButton = lazy(() =>
   import("../components/AutoCounterStopButton")
 );
-const Accordion = lazy(() => import("../components/Accordion"));
+const DebounceAndThrottling = lazy(() =>
+  import("../components/DebounceAndThrottling")
+);
+//const Accordion = lazy(() => import("../components/Accordion"));
+const TicTacToe = lazy(() => import("../components/TicTacToe/TicTacToe"));
 
 export const appRouter = createBrowserRouter([
-  {
-    path: "testing",
-    name: "Test platform",
-    element: <Testing />,
-  },
   { path: "/", element: <App /> },
   {
     name: "Testing Suspense",
@@ -112,21 +111,35 @@ export const appRouter = createBrowserRouter([
     ),
   },
   {
-    name: "Accordion",
-    path: "/accordion",
+    name: "Debounce and Throttling Example",
+    path: "debounce-throttling-example",
     element: (
       <Suspense fallback={<>Loading...</>}>
-        <Accordion />
+        <DebounceAndThrottling />
+      </Suspense>
+    ),
+  },
+  // {
+  //   name: "Accordion",
+  //   path: "/accordion",
+  //   element: (
+  //     <Suspense fallback={<>Loading...</>}>
+  //       <Accordion />
+  //     </Suspense>
+  //   ),
+  // },
+  {
+    name: "Tic Tac Toe",
+    path: "/tic-tac-toe",
+    element: (
+      <Suspense fallback={<>Loading...</>}>
+        <TicTacToe />
       </Suspense>
     ),
   },
 ]);
 
 export const miniProjectNamesAndLinks = [
-  {
-    path: "testing",
-    name: "Test platform",
-  },
   { name: "Testing Suspense", path: "/suspense" },
   { name: "Kanban", path: "/kanban" },
   { name: "Next Prev Slides", path: "/nextprev" },
@@ -151,6 +164,10 @@ export const miniProjectNamesAndLinks = [
   {
     name: "Auto Counter & Stop button",
     path: "auto-counter-stop-button",
+  },
+  {
+    name: "Debounce and Throttling Example",
+    path: "debounce-throttling-example",
   },
   {
     name: "Tic Tac Toe",

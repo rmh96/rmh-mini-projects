@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import BackToHome from "./BackToHome";
 
 const Testing = () => {
   const [value, setValue] = useState(0);
@@ -49,16 +50,19 @@ const Testing = () => {
 
   return (
     <>
-      <div>Testing Debounce / Throtting by mouse move</div>
-      {/* <input
+      <BackToHome />
+      <div className="pt-32">
+        <div>Testing Debounce / Throtting by mouse move</div>
+        {/* <input
         className="border"
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       /> */}
-      <div>Default: {value}</div>
-      <div>Debounce: {dValue}</div>
-      <div>Throtting: {tValue}</div>
+        <div>Default: {value}</div>
+        <div>Debounce: {dValue}</div>
+        <div>Throtting: {tValue}</div>
+      </div>
     </>
   );
 };
