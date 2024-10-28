@@ -1,39 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTicTacToe } from "./useTicTacToe";
 import BackToHome from "../BackToHome";
-
-//dynamic A*A grid setting
-const dynaMicBoard = 3;
+import Board from "./Board";
 
 const TicTacToe = () => {
-  const { board, currentStatus, handleClick, resetGame } =
-    useTicTacToe(dynaMicBoard);
+  const {
+    boardSize,
+    board,
+    currentStatus,
+    handleClick,
+    resetGame,
+    handleBoardSize,
+  } = useTicTacToe();
+  console.log("Size - ", boardSize);
   return (
     <>
       <BackToHome />
-      <div
-        className="w-full flex flex-col justify-center items-center pt-10 relative left-1/2 -translate-x-1/2"
-        style={{ maxWidth: `calc(${dynaMicBoard + 1} * 100px)` }}
-      >
-        <div className="w-full flex justify-between items-center mb-10">
+      <div className="flex flex-col justify-center items-center mt-20 relative">
+        <div className="w-1/3 flex justify-between items-center mb-20">
           <div className="text-xl font-bold">{currentStatus()}</div>
+          <div>
+            <span>Board Size: </span>
+            <select
+              name="boardSize"
+              value={boardSize}
+              onChange={handleBoardSize}
+            >
+              {Array.from({ length: 8 }, (_, i) => i + 3).map((item) => {
+                return (
+                  <option value={item} key={item}>
+                    {item}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <button className=" bg-gray-200 p-1 rounded " onClick={resetGame}>
             Reset
           </button>
         </div>
-        <div className="flex justify-center flex-wrap m-0">
-          {board.map((val, index) => {
-            return (
-              <button
-                key={index}
-                className=" border-2 w-32 h-32 flex justify-center items-center cursor-pointer hover:bg-gray-200 text-lg"
-                onClick={() => handleClick(index)}
-                disabled={val !== null}
-              >
-                {val}
-              </button>
-            );
-          })}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 h-auto">
+          <Board
+            board={board}
+            handleClick={handleClick}
+            boardSize={boardSize}
+          />
         </div>
       </div>
     </>

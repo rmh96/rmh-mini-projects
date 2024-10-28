@@ -1,27 +1,35 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
-const boardCells = () => Array(9).fill(null);
-
-export const useTicTacToe = (dynaMicBoard) => {
-  const [board, setBoard] = useState(boardCells());
+export const useTicTacToe = () => {
+  const [boardSize, setBoardSize] = useState(3);
+  const boardCells = useMemo(
+    () => Array(boardSize * boardSize).fill(null),
+    [boardSize]
+  );
+  console.log(boardCells);
+  const [board, setBoard] = useState(boardCells);
   const [isXNext, setIsXNext] = useState(true);
+
+  const handleBoardSize = (e) => {
+    setBoardSize(e.target.value);
+  };
 
   const winningPatterns = useCallback(() => {
     const winningPattern = [];
     //rows pattern
-    for (let i = 0; i < dynaMicBoard; i++) {
+    for (let i = 0; i < boardSize; i++) {
       const rowsP = [];
-      for (let j = 0; j < dynaMicBoard; j++) {
-        rowsP.push(i * dynaMicBoard + j);
+      for (let j = 0; j < boardSize; j++) {
+        rowsP.push(i * boardSize + j);
       }
       winningPattern.push(rowsP);
     }
 
     //columns pattern
-    for (let i = 0; i < dynaMicBoard; i++) {
+    for (let i = 0; i < boardSize; i++) {
       const colsP = [];
-      for (let j = 0; j < dynaMicBoard; j++) {
-        colsP.push(j * dynaMicBoard + i);
+      for (let j = 0; j < boardSize; j++) {
+        colsP.push(j * boardSize + i);
       }
       winningPattern.push(colsP);
     }
@@ -29,15 +37,15 @@ export const useTicTacToe = (dynaMicBoard) => {
     //diagonal patterns
     const diagonal1 = [],
       diagonal2 = [];
-    for (let i = 0; i < dynaMicBoard; i++) {
-      diagonal1.push(i * dynaMicBoard + i);
-      diagonal2.push(i * dynaMicBoard + (dynaMicBoard - 1 - i));
+    for (let i = 0; i < boardSize; i++) {
+      diagonal1.push(i * boardSize + i);
+      diagonal2.push(i * boardSize + (boardSize - 1 - i));
     }
     winningPattern.push(diagonal1);
     winningPattern.push(diagonal2);
 
     return winningPattern;
-  }, [dynaMicBoard]);
+  }, [boardSize]);
 
   const currentStatus = () => {
     const winner = calculateWinner(board);
@@ -49,9 +57,16 @@ export const useTicTacToe = (dynaMicBoard) => {
   const calculateWinner = (board) => {
     const winningPattern = winningPatterns();
     for (let i = 0; i < winningPattern.length; i++) {
-      const [a, b, c] = winningPattern[i];
-      if (board[a] && board[b] === board[c] && board[a] === board[c]) {
-        return board[a];
+      const firstVal = board[winningPattern[i][0]];
+      let allEqual = true;
+      const remainingIndex = winningPattern[i].slice(1);
+      for (let j of remainingIndex) {
+        if (board[j] !== firstVal) {
+          allEqual = false;
+        }
+      }
+      if (allEqual && firstVal !== null) {
+        return firstVal;
       }
     }
     return null;
@@ -72,11 +87,17 @@ export const useTicTacToe = (dynaMicBoard) => {
     setIsXNext(true);
   };
 
+  useEffect(() => {
+    setBoard(boardCells);
+  }, [boardCells]);
+
   return {
+    boardSize,
     board,
     resetGame,
     currentStatus,
     handleClick,
     calculateWinner,
+    handleBoardSize,
   };
 };
