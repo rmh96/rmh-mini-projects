@@ -27,6 +27,7 @@ const TicTacToe = () => {
               value={boardSize}
               onChange={handleBoardSize}
             >
+              {/* Generating a array with 2 to 7 elements for the dropdown */}
               {Array.from({ length: 6 }, (_, i) => i + 2).map((item) => {
                 return (
                   <option value={item} key={item}>
