@@ -24,6 +24,11 @@ export const useTicTacToe = () => {
     setBoardSize(e.target.value);
   };
 
+  //this method will give us a array will all possible winning patterns like,
+  //For 3 * 3 grid,
+  // [
+  //   [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]
+  // ]
   const winningPatterns = useCallback(() => {
     const winningPattern = [];
     //rows pattern
