@@ -7,12 +7,13 @@ const TicTacToe = () => {
   const {
     boardSize,
     board,
+    wonCells,
     currentStatus,
     handleClick,
     resetGame,
     handleBoardSize,
   } = useTicTacToe();
-  console.log("Size - ", boardSize);
+
   return (
     <>
       <BackToHome />
@@ -26,7 +27,7 @@ const TicTacToe = () => {
               value={boardSize}
               onChange={handleBoardSize}
             >
-              {Array.from({ length: 8 }, (_, i) => i + 3).map((item) => {
+              {Array.from({ length: 6 }, (_, i) => i + 2).map((item) => {
                 return (
                   <option value={item} key={item}>
                     {item}
@@ -44,6 +45,7 @@ const TicTacToe = () => {
             board={board}
             handleClick={handleClick}
             boardSize={boardSize}
+            wonCells={wonCells}
           />
         </div>
       </div>
