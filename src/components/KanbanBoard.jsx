@@ -11,7 +11,6 @@ const KanbanBoard = () => {
       if (item.id === id) {
         item.stage++;
       }
-
       return item;
     });
     setTasks(newTasks);

@@ -19,7 +19,7 @@ const App = () => {
             <div
               key={item.name}
               className={`text-base cursor-pointer w-[33%] border h-20 flex items-center justify-center drop-shadow-lg px-5 ${
-                item?.stillWorking && "text-red-500"
+                item.stillWorking && "text-red-500"
               }`}
               onClick={() => navigate(item.path)}
             >

@@ -10,7 +10,9 @@ const TestSuspense = lazy(() => import("../components/TestingSuspense"));
 const KanbanBoard = lazy(() => import("../components/KanbanBoard"));
 const NextPrevSlide = lazy(() => import("../components/NextPrevSlides"));
 const SortedArticles = lazy(() => import("../components/SortedArticles"));
-const ProductList = lazy(() => import("../components/ProductList"));
+const ProductList = lazy(() =>
+  import("../components/ProductList With IO/ProductList.jsx")
+);
 const ButtonPagination = lazy(() => import("../components/ButtonPagination"));
 const GridActivateAndDeActivate = lazy(() =>
   import("../components/GridActivateAndDeActivate")
@@ -71,7 +73,6 @@ export const appRouter = createBrowserRouter([
         <ProductList />
       </Suspense>
     ),
-    stillWorking: true,
   },
   {
     name: "Feeds Loading based on Button Click",
@@ -147,7 +148,7 @@ export const miniProjectNamesAndLinks = [
   {
     name: "Product List (Trying Intersection Observer... yet)",
     path: "/products",
-    stillWorking: true,
+    stillWorking: false,
   },
   {
     name: "Feeds Loading based on Button Click",
