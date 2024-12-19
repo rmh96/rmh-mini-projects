@@ -2,7 +2,9 @@ import React from "react";
 
 const Board = ({ board, handleClick, boardSize, wonCells }) => {
   return (
-    <div className={`w-full grid grid-cols-${boardSize} m-0 p-0`}>
+    <div className={`w-full grid m-0 p-0 grid-cols-4`} style={{
+      gridTemplateColumns: `repeat(${boardSize}, minmax(0, 1fr))`
+    }}>
       {board.map((val, index) => {
         return (
           <button
