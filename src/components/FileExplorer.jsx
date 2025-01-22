@@ -18,12 +18,22 @@ const FileExplorer = ({ explorer }) => {
     });
   };
 
-  //   const handleDeleteFolder = (e, id) => {
-  //     e.stopPropagation();
-  //     setCreateNew({ ...createNew, visible: false });
-  //     console.log(id, fileExplorer);
+  // const handleDeleteFolder = (e, id, isFolder) => {
+  //   e.stopPropagation();
+  //   setCreateNew({ ...createNew, visible: false });
+  //   //console.log(id, fileExplorer);
+  //   if (isFolder) {
   //     setFileExplorer({});
-  //   };
+  //   } else {
+  //     console.log(fileExplorer);
+  //     const newItemList = [...fileExplorer].filter((item) => {
+  //       console.log(id, item.id);
+  //       return item.id !== id;
+  //     });
+  //     console.log(newItemList);
+  //     setFileExplorer({ ...fileExplorer, items: newItemList });
+  //   }
+  // };
 
   const isAddNew = (e, isFolderFlag) => {
     if (e.keyCode === 13 && e.target.value) {
@@ -66,7 +76,7 @@ const FileExplorer = ({ explorer }) => {
             </button>
             {/* <button
               className="px-1 border border-black mr-1"
-              onClick={(e) => handleDeleteFolder(e, fileExplorer?.id)}
+              onClick={(e) => handleDeleteFolder(e, fileExplorer?.id, true)}
             >
               🗑️
             </button> */}
@@ -92,7 +102,17 @@ const FileExplorer = ({ explorer }) => {
       </div>
     );
   } else {
-    return <div>📄{fileExplorer.name}</div>;
+    return (
+      <div>
+        📄{fileExplorer.name}{" "}
+        {/* <button
+          className="px-1 mr-1"
+          onClick={(e) => handleDeleteFolder(e, fileExplorer?.id, false)}
+        >
+          🗑️
+        </button> */}
+      </div>
+    );
   }
 };
 
